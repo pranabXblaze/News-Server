@@ -2,7 +2,6 @@ import express, { urlencoded } from 'express';
 import cors from 'cors';
 import axios from 'axios';
 
-const api_key = "56e0a9701f0a440c99abf2f33a9110ad"
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -38,7 +37,7 @@ app.get('/all-news', async (req, res) => {
     let pageSize = parseInt(req.query.pageSize) || 80;
     let page = parseInt(req.query.page) || 1;
 
-    const result = await fetchNews(`https://newsapi.org/v2/everything?page=${page}&pageSize=${pageSize}&q=${encodeURIComponent(q)}&apikey=${api_key}`)
+    const result = await fetchNews(`https://newsapi.org/v2/everything?page=${page}&pageSize=${pageSize}&q=${encodeURIComponent(q)}&apikey=${process.env.API_KEY}`)
     res.status(result.status).json(result)
 })
 
@@ -47,7 +46,7 @@ app.get("/top-headlines", async (req, res) => {
     let page = parseInt(req.query.page) || 1;
     let category = req.query.category || "general";
   
-   const result = await fetchNews(`https://newsapi.org/v2/top-headlines?category=${category}&language=en&page=${page}&pageSize=${pageSize}&apiKey=${api_key}`);
+   const result = await fetchNews(`https://newsapi.org/v2/top-headlines?category=${category}&language=en&page=${page}&pageSize=${pageSize}&apiKey=${process.env.API_KEY}`);
    res.status(result.status).json(result);
   });
 
@@ -56,7 +55,7 @@ app.get("/country/:iso", async (req, res) => {
     let page = parseInt(req.query.page) || 1;
     const country = req.params.iso || 'in'
 
-    const result = await fetchNews(`https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${api_key}&page=${page}&pageSize=${pageSize}`);
+    const result = await fetchNews(`https://newsapi.org/v2/top-headlines?country=${country}&page=${page}&pageSize=${pageSize}&apiKey=${process.env.API_KEY}`);
     res.status(result.status).json(result);
   });
 
