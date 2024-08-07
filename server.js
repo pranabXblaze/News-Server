@@ -44,7 +44,7 @@ app.get('/all-news', async (req, res) => {
 app.get("/top-headlines", async (req, res) => {
     let pageSize = parseInt(req.query.pageSize) || 80;
     let page = parseInt(req.query.page) || 1;
-    let category = req.query.category || "general";
+    let category = req.query.category || "business";
   
    const result = await fetchNews(`https://newsapi.org/v2/top-headlines?category=${category}&language=en&page=${page}&pageSize=${pageSize}&apiKey=${process.env.API_KEY}`);
    res.status(result.status).json(result);
