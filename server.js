@@ -1,6 +1,8 @@
-import express, { urlencoded } from 'express';
+import express from 'express';
 import cors from 'cors';
 import axios from 'axios';
+import { configDotenv } from 'dotenv';
+configDotenv();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -59,7 +61,6 @@ app.get("/country/:iso", async (req, res) => {
     const result = await fetchNews(`https://newsapi.org/v2/top-headlines?country=${country}&page=${page}&pageSize=${pageSize}&apiKey=${process.env.API_KEY}`);
     res.status(result.status).json(result);
   });
-
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 })
