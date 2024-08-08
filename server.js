@@ -8,7 +8,6 @@ const port = process.env.PORT || 3000;
 app.use(cors({
     origin: '*',
     methods: ['GET', 'POST', 'OPTIONS'],
-    credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization']  // Additional headers to be included in the request
 }))
 app.use(express.urlencoded({ extended: true }))
@@ -19,7 +18,7 @@ async function fetchNews(url) {
     const response = await axios.get(url)
     return {
         status : 200,
-        message: "Succesfully fetched tha data.",
+        message: "Succesfully fetched the data.",
         data : response.data
     }
    } catch (error) {
