@@ -18,6 +18,7 @@ async function fetchNews(url) {
     const response = await axios.get(url)
     return {
         status : 200,
+        success: true,
         message: "Succesfully fetched the data.",
         data : response.data
     }
@@ -25,6 +26,7 @@ async function fetchNews(url) {
     console.error(`API request Error : ${error.message}`);
     return {
         status : 500,
+        success: false,
         message: "Failed to fetch the data.",
         error: error.response ? error.response.data : error.message
   }
